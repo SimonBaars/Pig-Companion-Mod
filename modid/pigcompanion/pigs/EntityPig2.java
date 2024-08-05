@@ -22,286 +22,157 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.AchievementList;
 import net.minecraft.world.World;
 
-public class EntityPig2 extends EntityAnimal
-{
-private final EntityAIControlledByPlayer aiControlledByPlayer;
-    public EntityPig2(World par1World)
-    {
-        super(par1World);
-        //this.texture = "/pigs/pigarmorleather.png";
-        this.setSize(0.9F, 0.9F);
-        this.getNavigator().setAvoidsWater(true);
-        float f = 0.25F;
-        this.tasks.addTask(0, new EntityAISwimming(this));
-        this.tasks.addTask(1, new EntityAIPanic(this, 0.38F));
-		this.tasks.addTask(4, new EntityAITempt(this, 0.3F, PigCompanionMod.potatoOnAStick, false));
-        this.tasks.addTask(4, new EntityAITempt(this, 0.3F, Items.potato, false));
-		this.tasks.addTask(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.34F));
-        this.tasks.addTask(2, new EntityAIMate(this, f));
-        this.tasks.addTask(3, new EntityAITempt(this, 0.4F, Items.wheat, false));
-        this.tasks.addTask(4, new EntityAIFollowParent(this, 0.28F));
-        this.tasks.addTask(5, new EntityAIWander(this, f));
-        this.tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6F));
-        this.tasks.addTask(7, new EntityAILookIdle(this));
-    }
+public class EntityPig2 extends EntityAnimal {
+   private final EntityAIControlledByPlayer aiControlledByPlayer;
 
-    /**
-     * Returns true if the newer Entity AI code should be run
-     */
-    public boolean isAIEnabled()
-    {
-        return true;
-    }
-/**
-    public int getMaxHealth()
-    {
-        return 15;
-    }
-    */
-    //CODE HAS BEEN REMOVED HERE!! THIS MEANS THAT STEERING WON'T WORK ANYMORE!!
-    
-	public boolean canBeSteered()
-    {
-        ItemStack var1 = ((EntityPlayer)this.riddenByEntity).getHeldItem();
-        return var1 != null && var1.itemID == PigCompanionMod.potatoOnAStick;
-    }/**
-	public EntityAgeable func_90011_a(EntityAgeable par1EntityAgeable)
-    {
-        return this.spawnBabyAnimal(par1EntityAgeable);
-    }
-	/**
-	public EntityPig2 spawnBabyAnimal(EntityAgeable par1EntityAgeable)
-    {
-        return new EntityPig2(this.worldObj);
-    }*/
-	public EntityAIControlledByPlayer getAIControlledByPlayer()
-    {
-        return this.aiControlledByPlayer;
-    }
+   public EntityPig2(World par1World) {
+      super(par1World);
+      this.func_70105_a(0.9F, 0.9F);
+      this.func_70661_as().func_75491_a(true);
+      float f = 0.25F;
+      this.field_70714_bg.func_75776_a(0, new EntityAISwimming(this));
+      this.field_70714_bg.func_75776_a(1, new EntityAIPanic(this, 0.3799999952316284D));
+      this.field_70714_bg.func_75776_a(4, new EntityAITempt(this, 0.30000001192092896D, PigCompanionMod.potatoOnAStick, false));
+      this.field_70714_bg.func_75776_a(4, new EntityAITempt(this, 0.30000001192092896D, Items.field_151174_bG, false));
+      this.field_70714_bg.func_75776_a(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.34F));
+      this.field_70714_bg.func_75776_a(2, new EntityAIMate(this, (double)f));
+      this.field_70714_bg.func_75776_a(3, new EntityAITempt(this, 0.4000000059604645D, Items.field_151015_O, false));
+      this.field_70714_bg.func_75776_a(4, new EntityAIFollowParent(this, 0.2800000011920929D));
+      this.field_70714_bg.func_75776_a(5, new EntityAIWander(this, (double)f));
+      this.field_70714_bg.func_75776_a(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+      this.field_70714_bg.func_75776_a(7, new EntityAILookIdle(this));
+   }
 
-    protected void entityInit()
-    {
-        super.entityInit();
-        this.dataWatcher.addObject(16, Byte.valueOf((byte)0));
-    }
+   public boolean func_70650_aV() {
+      return true;
+   }
 
-    /**
-     * (abstract) Protected helper method to write subclass entity data to NBT.
-     */
-    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
-    {
-        super.writeEntityToNBT(par1NBTTagCompound);
-        par1NBTTagCompound.setBoolean("Saddle", getSaddled());
-    }
+   public EntityAIControlledByPlayer getAIControlledByPlayer() {
+      return this.aiControlledByPlayer;
+   }
 
-    /**
-     * (abstract) Protected helper method to read subclass entity data from NBT.
-     */
-    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
-    {
-        super.readEntityFromNBT(par1NBTTagCompound);
-        setSaddled(par1NBTTagCompound.getBoolean("Saddle"));
-    }
+   protected void func_70088_a() {
+      super.func_70088_a();
+      this.field_70180_af.func_75682_a(16, (byte)0);
+   }
 
-    /**
-     * Returns the sound this mob makes while it's alive.
-     */
-    protected String getLivingSound()
-    {
-        return "mob.pig";
-    }
+   public void func_70014_b(NBTTagCompound par1NBTTagCompound) {
+      super.func_70014_b(par1NBTTagCompound);
+      par1NBTTagCompound.func_74757_a("Saddle", this.getSaddled());
+   }
 
-    /**
-     * Returns the sound this mob makes when it is hurt.
-     */
-    protected String getHurtSound()
-    {
-        return "mob.pig";
-    }
+   public void func_70037_a(NBTTagCompound par1NBTTagCompound) {
+      super.func_70037_a(par1NBTTagCompound);
+      this.setSaddled(par1NBTTagCompound.func_74767_n("Saddle"));
+   }
 
-    /**
-     * Returns the sound this mob makes on death.
-     */
-    protected String getDeathSound()
-    {
-        return "mob.pigdeath";
-    }
+   protected String func_70639_aQ() {
+      return "mob.pig";
+   }
 
-    /**
-     * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
-     */
-    public boolean interact(EntityPlayer par1EntityPlayer)
-    {
-	
-		
-		
-ItemStack var2 = par1EntityPlayer.inventory.getCurrentItem();
-		
-		if (var2 != null && var2.itemID == Items.leather_helmet && this.getGrowingAge() >= 0)
-        {
-            this.setDead();
+   protected String func_70621_aR() {
+      return "mob.pig";
+   }
 
-            if (!this.worldObj.isRemote)
-            {
-                EntityPigLeather var3 = new EntityPigLeather(this.worldObj);
-                var3.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
-				par1EntityPlayer.inventory.consumeInventoryItem(Items.leather_helmet);
-                //var3.setEntityHealth(this.getHealth());
-                var3.renderYawOffset = this.renderYawOffset;
-                this.worldObj.spawnEntityInWorld(var3);
-            }
+   protected String func_70673_aS() {
+      return "mob.pigdeath";
+   }
 
-            return true;
-        }
-		
-	
-		
-		if (var2 != null && var2.itemID == Item.helmetIron.itemID && this.getGrowingAge() >= 0)
-        {
-            this.setDead();
+   public boolean func_70085_c(EntityPlayer par1EntityPlayer) {
+      ItemStack itemstack = par1EntityPlayer.field_71071_by.func_70448_g();
+      if (itemstack != null && itemstack.func_77973_b() == Items.field_151024_Q) {
+         this.func_70106_y();
+         if (!this.field_70170_p.field_72995_K) {
+            EntityPigLeather var3 = new EntityPigLeather(this.field_70170_p);
+            var3.func_70012_b(this.field_70165_t, this.field_70163_u, this.field_70161_v, this.field_70177_z, this.field_70125_A);
+            par1EntityPlayer.field_71071_by.func_146026_a(Items.field_151024_Q);
+            var3.field_70761_aq = this.field_70761_aq;
+            this.field_70170_p.func_72838_d(var3);
+         }
 
-            if (!this.worldObj.isRemote)
-            {
-                EntityPigIron var3 = new EntityPigIron(this.worldObj);
-                var3.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
-				par1EntityPlayer.inventory.consumeInventoryItem(Items.iron_helmet);
-                //var3.setEntityHealth(this.getHealth());
-                var3.renderYawOffset = this.renderYawOffset;
-                this.worldObj.spawnEntityInWorld(var3);
-            }
+         return true;
+      } else if (itemstack != null && itemstack.func_77973_b() == Items.field_151028_Y) {
+         this.func_70106_y();
+         if (!this.field_70170_p.field_72995_K) {
+            EntityPigIron var3 = new EntityPigIron(this.field_70170_p);
+            var3.func_70012_b(this.field_70165_t, this.field_70163_u, this.field_70161_v, this.field_70177_z, this.field_70125_A);
+            par1EntityPlayer.field_71071_by.func_146026_a(Items.field_151028_Y);
+            var3.field_70761_aq = this.field_70761_aq;
+            this.field_70170_p.func_72838_d(var3);
+         }
 
-            return true;
-        }
-		
-	
-		
-		if (var2 != null && var2.itemID == Item.helmetGold.itemID && this.getGrowingAge() >= 0)
-        {
-            this.setDead();
+         return true;
+      } else if (itemstack != null && itemstack.func_77973_b() == Items.field_151169_ag) {
+         this.func_70106_y();
+         if (!this.field_70170_p.field_72995_K) {
+            EntityPigGold var3 = new EntityPigGold(this.field_70170_p);
+            var3.func_70012_b(this.field_70165_t, this.field_70163_u, this.field_70161_v, this.field_70177_z, this.field_70125_A);
+            par1EntityPlayer.field_71071_by.func_146026_a(Items.field_151169_ag);
+            var3.field_70761_aq = this.field_70761_aq;
+            this.field_70170_p.func_72838_d(var3);
+         }
 
-            if (!this.worldObj.isRemote)
-            {
-                EntityPigGold var3 = new EntityPigGold(this.worldObj);
-                var3.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
-				par1EntityPlayer.inventory.consumeInventoryItem(Items.golden_helmet);
-                //var3.setEntityHealth(this.getHealth());
-                var3.renderYawOffset = this.renderYawOffset;
-                this.worldObj.spawnEntityInWorld(var3);
-            }
+         return true;
+      } else if (itemstack != null && itemstack.func_77973_b() == Items.field_151161_ac) {
+         this.func_70106_y();
+         if (!this.field_70170_p.field_72995_K) {
+            EntityPigDiamond var3 = new EntityPigDiamond(this.field_70170_p);
+            var3.func_70012_b(this.field_70165_t, this.field_70163_u, this.field_70161_v, this.field_70177_z, this.field_70125_A);
+            par1EntityPlayer.field_71071_by.func_146026_a(Items.field_151161_ac);
+            var3.field_70761_aq = this.field_70761_aq;
+            this.field_70170_p.func_72838_d(var3);
+         }
 
-            return true;
-        }
-		
-		
-		
-		if (var2 != null && var2.itemID == Item.helmetDiamond.itemID && this.getGrowingAge() >= 0)
-        {
-            this.setDead();
+         return true;
+      } else if (super.func_70085_c(par1EntityPlayer)) {
+         return true;
+      } else if (!this.getSaddled() || this.field_70170_p.field_72995_K || this.field_70153_n != null && this.field_70153_n != par1EntityPlayer) {
+         return false;
+      } else {
+         par1EntityPlayer.func_70078_a(this);
+         return true;
+      }
+   }
 
-            if (!this.worldObj.isRemote)
-            {
-                EntityPigDiamond var3 = new EntityPigDiamond(this.worldObj);
-                var3.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
-				par1EntityPlayer.inventory.consumeInventoryItem(Items.diamond_helmet);
-                //var3.setEntityHealth(this.getHealth());
-                var3.renderYawOffset = this.renderYawOffset;
-                this.worldObj.spawnEntityInWorld(var3);
-            }
+   protected Item getDropItemId() {
+      return this.func_70027_ad() ? Items.field_151157_am : Items.field_151147_al;
+   }
 
-            return true;
-        }
-		
-        if (!super.interact(par1EntityPlayer))
-        {
-            if (getSaddled() && !worldObj.isRemote && (riddenByEntity == null || riddenByEntity == par1EntityPlayer))
-            {
-                par1EntityPlayer.mountEntity(this);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-		else
-		{
-			return true;
-		}
-    }
+   public boolean getSaddled() {
+      return (this.field_70180_af.func_75683_a(16) & 1) != 0;
+   }
 
-    /**
-     * Returns the item ID for the item the mob drops on death.
-     */
-    protected Item getDropItemId()
-    {
-        return this.isBurning() ? Items.cooked_porkchop : Items.porkchop;
-    }
+   public void setSaddled(boolean par1) {
+      if (par1) {
+         this.field_70180_af.func_75692_b(16, (byte)1);
+      } else {
+         this.field_70180_af.func_75692_b(16, (byte)0);
+      }
 
-    /**
-     * Returns true if the pig is saddled.
-     */
-    public boolean getSaddled()
-    {
-        return (dataWatcher.getWatchableObjectByte(16) & 1) != 0;
-    }
+   }
 
-    /**
-     * Set or remove the saddle of the pig.
-     */
-    public void setSaddled(boolean par1)
-    {
-        if (par1)
-        {
-            dataWatcher.updateObject(16, Byte.valueOf((byte)1));
-        }
-        else
-        {
-            dataWatcher.updateObject(16, Byte.valueOf((byte)0));
-        }
-    }
+   public void func_70077_a(EntityLightningBolt par1EntityLightningBolt) {
+      if (!this.field_70170_p.field_72995_K) {
+         EntityPigZombie entitypigzombie = new EntityPigZombie(this.field_70170_p);
+         entitypigzombie.func_70012_b(this.field_70165_t, this.field_70163_u, this.field_70161_v, this.field_70177_z, this.field_70125_A);
+         this.field_70170_p.func_72838_d(entitypigzombie);
+         this.func_70106_y();
+      }
+   }
 
-    /**
-     * Called when a lightning bolt hits the entity.
-     */
-    public void onStruckByLightning(EntityLightningBolt par1EntityLightningBolt)
-    {
-        if (worldObj.isRemote)
-        {
-            return;
-        }
-        else
-        {
-            EntityPigZombie entitypigzombie = new EntityPigZombie(worldObj);
-            entitypigzombie.setLocationAndAngles(posX, posY, posZ, rotationYaw, rotationPitch);
-            worldObj.spawnEntityInWorld(entitypigzombie);
-            setDead();
-            return;
-        }
-    }
+   protected void func_70069_a(float par1) {
+      super.func_70069_a(par1);
+      if (par1 > 5.0F && this.field_70153_n instanceof EntityPlayer) {
+         ((EntityPlayer)this.field_70153_n).func_71029_a(AchievementList.field_76021_u);
+      }
 
-    /**
-     * Called when the mob is falling. Calculates and applies fall damage.
-     */
-    protected void fall(float par1)
-    {
-        super.fall(par1);
+   }
 
-        if (par1 > 5.0F && this.riddenByEntity instanceof EntityPlayer)
-        {
-            ((EntityPlayer)this.riddenByEntity).triggerAchievement(AchievementList.flyPig);
-        }
-    }
+   public EntityPig2 spawnBabyAnimal(EntityAgeable par1EntityAgeable) {
+      return new EntityPig2(this.field_70170_p);
+   }
 
-    /**
-     * This function is used when two same-species animals in 'love mode' breed to generate the new baby animal.
-     */
-    public EntityPig2 spawnBabyAnimal(EntityAgeable par1EntityAgeable)
-    {
-        return new EntityPig2(this.worldObj);
-    }
-	
-	public EntityAgeable createChild(EntityAgeable par1EntityAgeable)
-    {
-        return this.spawnBabyAnimal(par1EntityAgeable);
-    }
+   public EntityAgeable func_90011_a(EntityAgeable par1EntityAgeable) {
+      return this.spawnBabyAnimal(par1EntityAgeable);
+   }
 }

@@ -6,66 +6,45 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.util.ResourceLocation;
 
-public class RenderPigIron extends RenderLiving
-{
-	private static final ResourceLocation field_110888_a = new ResourceLocation("textures/entity/pig/pig_saddle.png");
-    private static final ResourceLocation field_110887_f = new ResourceLocation("textures/pigs/pigarmoriron.png");
-	
-    public RenderPigIron(ModelBase par1ModelBase, ModelBase par2ModelBase, float par3)
-    {
-        super(par1ModelBase, par3);
-        setRenderPassModel(par2ModelBase);
-    }
+public class RenderPigIron extends RenderLiving {
+   private static final ResourceLocation field_110888_a = new ResourceLocation("textures/entity/pig/pig_saddle.png");
+   private static final ResourceLocation field_110887_f = new ResourceLocation("textures/pigs/pigarmoriron.png");
 
-    protected int renderSaddledPig(EntityPigIron par1EntityPig, int par2, float par3)
-    {
-        if (par2 == 0 && par1EntityPig.getSaddled())
-        {
-            this.bindTexture(field_110888_a);
-            return 1;
-        }
-        else
-        {
-            return -1;
-        }
-    }
+   public RenderPigIron(ModelBase par1ModelBase, ModelBase par2ModelBase, float par3) {
+      super(par1ModelBase, par3);
+      this.func_77042_a(par2ModelBase);
+   }
 
-    protected ResourceLocation func_110886_a(EntityPigIron par1EntityPig)
-    {
-        return field_110887_f;
-    }
+   protected int renderSaddledPig(EntityPigIron par1EntityPig, int par2, float par3) {
+      if (par2 == 0 && par1EntityPig.getSaddled()) {
+         this.func_110776_a(field_110888_a);
+         return 1;
+      } else {
+         return -1;
+      }
+   }
 
-    public void func_40286_a(EntityPigIron par1EntityPig, double par2, double par4, double par6, float par8, float par9)
-    {
-        super.doRender(par1EntityPig, par2, par4, par6, par8, par9);
-    }
+   protected ResourceLocation func_110886_a(EntityPigIron par1EntityPig) {
+      return field_110887_f;
+   }
 
-    /**
-     * Queries whether should render the specified pass or not.
-     */
-    protected int shouldRenderPass(EntityLiving par1EntityLiving, int par2, float par3)
-    {
-        return renderSaddledPig((EntityPigIron)par1EntityLiving, par2, par3);
-    }
+   public void func_40286_a(EntityPigIron par1EntityPig, double par2, double par4, double par6, float par8, float par9) {
+      super.func_76986_a(par1EntityPig, par2, par4, par6, par8, par9);
+   }
 
-    public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9)
-    {
-        func_40286_a((EntityPigIron)par1EntityLiving, par2, par4, par6, par8, par9);
-    }
+   protected int shouldRenderPass(EntityLiving par1EntityLiving, int par2, float par3) {
+      return this.renderSaddledPig((EntityPigIron)par1EntityLiving, par2, par3);
+   }
 
-    /**
-     * Actually renders the given argument. This is a synthetic bridge method, always casting down its argument and then
-     * handing it off to a worker function which does the actual work. In all probabilty, the class Render is generic
-     * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
-     * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
-     */
-    public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
-    {
-        func_40286_a((EntityPigIron)par1Entity, par2, par4, par6, par8, par9);
-    }
-	
-	protected ResourceLocation getEntityTexture(Entity par1Entity)
-    {
-        return this.func_110886_a((EntityPigIron)par1Entity);
-    }
+   public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9) {
+      this.func_40286_a((EntityPigIron)par1EntityLiving, par2, par4, par6, par8, par9);
+   }
+
+   public void func_76986_a(Entity par1Entity, double par2, double par4, double par6, float par8, float par9) {
+      this.func_40286_a((EntityPigIron)par1Entity, par2, par4, par6, par8, par9);
+   }
+
+   protected ResourceLocation func_110775_a(Entity par1Entity) {
+      return this.func_110886_a((EntityPigIron)par1Entity);
+   }
 }

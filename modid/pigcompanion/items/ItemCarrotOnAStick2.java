@@ -16,201 +16,137 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemCarrotOnAStick2 extends Item
-{
-    public ItemCarrotOnAStick2(int par1)
-    {
-        super();
-        this.setCreativeTab(CreativeTabs.tabTransport);
-        this.setMaxStackSize(1);
-        this.setMaxDamage(25);
-    }
+public class ItemCarrotOnAStick2 extends Item {
+   private static final String __OBFID = "CL_00000001";
 
-    @SideOnly(Side.CLIENT)
+   public ItemCarrotOnAStick2() {
+      this.func_77637_a(CreativeTabs.field_78029_e);
+      this.func_77625_d(1);
+      this.func_77656_e(25);
+   }
 
-    /**
-     * Returns True is the item is renderer in full 3D when hold.
-     */
-    public boolean isFull3D()
-    {
-        return true;
-    }
+   public boolean func_77662_d() {
+      return true;
+   }
 
-    @SideOnly(Side.CLIENT)
+   public boolean func_77629_n_() {
+      return true;
+   }
 
-    /**
-     * Returns true if this item should be rotated by 180 degrees around the Y axis when being held in an entities
-     * hands.
-     */
-    public boolean shouldRotateAroundWhenRendering()
-    {
-        return true;
-    }
-
-    /**
-     * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
-     */
-    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
-    {
-        if (par3EntityPlayer.isRiding() && par3EntityPlayer.ridingEntity instanceof EntityPig)
-        {
-            EntityPig entitypig = (EntityPig)par3EntityPlayer.ridingEntity;
-
-            if (entitypig.getAIControlledByPlayer().isControlledByPlayer() && par1ItemStack.getMaxDamage() - par1ItemStack.getItemDamage() >= 7)
-            {
-                entitypig.getAIControlledByPlayer().boostSpeed();
-                par1ItemStack.damageItem(7, par3EntityPlayer);
-
-                if (par1ItemStack.stackSize == 0)
-                {
-                    ItemStack itemstack1 = new ItemStack(Items.fishing_rod);
-                    itemstack1.setTagCompound(par1ItemStack.stackTagCompound);
-                    return itemstack1;
-                }
+   public ItemStack func_77659_a(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
+      if (par3EntityPlayer.func_70115_ae() && par3EntityPlayer.field_70154_o instanceof EntityPig) {
+         EntityPig var4 = (EntityPig)par3EntityPlayer.field_70154_o;
+         if (var4.func_82183_n().func_82633_h() && par1ItemStack.func_77958_k() - par1ItemStack.func_77960_j() >= 7) {
+            var4.func_82183_n().func_82632_g();
+            par1ItemStack.func_77972_a(7, par3EntityPlayer);
+            if (par1ItemStack.field_77994_a == 0) {
+               ItemStack var5 = new ItemStack(Items.field_151112_aM);
+               var5.func_77982_d(par1ItemStack.field_77990_d);
+               return var5;
             }
-        }
-        
-        if (par3EntityPlayer.isRiding() && par3EntityPlayer.ridingEntity instanceof EntityPigIron)
-        {
-            EntityPigIron var4 = (EntityPigIron)par3EntityPlayer.ridingEntity;
+         }
+      }
 
-            if (var4.getAIControlledByPlayer().isControlledByPlayer() && par1ItemStack.getMaxDamage() - par1ItemStack.getItemDamage() >= 7)
-            {
-                var4.getAIControlledByPlayer().boostSpeed();
-                par1ItemStack.damageItem(7, par3EntityPlayer);
-
-                if (par1ItemStack.stackSize == 0)
-                {
-                    return new ItemStack(Items.fishing_rod);
-                }
+      if (par3EntityPlayer.func_70115_ae() && par3EntityPlayer.field_70154_o instanceof EntityPigIron) {
+         EntityPigIron var4 = (EntityPigIron)par3EntityPlayer.field_70154_o;
+         if (var4.getAIControlledByPlayer().func_82633_h() && par1ItemStack.func_77958_k() - par1ItemStack.func_77960_j() >= 7) {
+            var4.getAIControlledByPlayer().func_82632_g();
+            par1ItemStack.func_77972_a(7, par3EntityPlayer);
+            if (par1ItemStack.field_77994_a == 0) {
+               return new ItemStack(Items.field_151112_aM);
             }
-        }
-		if (par3EntityPlayer.isRiding() && par3EntityPlayer.ridingEntity instanceof EntityPigDiamond)
-        {
-            EntityPigDiamond var4 = (EntityPigDiamond)par3EntityPlayer.ridingEntity;
+         }
+      }
 
-            if (var4.getAIControlledByPlayer().isControlledByPlayer() && par1ItemStack.getMaxDamage() - par1ItemStack.getItemDamage() >= 7)
-            {
-                var4.getAIControlledByPlayer().boostSpeed();
-                par1ItemStack.damageItem(7, par3EntityPlayer);
-
-                if (par1ItemStack.stackSize == 0)
-                {
-                    return new ItemStack(Items.fishing_rod);
-                }
+      if (par3EntityPlayer.func_70115_ae() && par3EntityPlayer.field_70154_o instanceof EntityPigDiamond) {
+         EntityPigDiamond var4 = (EntityPigDiamond)par3EntityPlayer.field_70154_o;
+         if (var4.getAIControlledByPlayer().func_82633_h() && par1ItemStack.func_77958_k() - par1ItemStack.func_77960_j() >= 7) {
+            var4.getAIControlledByPlayer().func_82632_g();
+            par1ItemStack.func_77972_a(7, par3EntityPlayer);
+            if (par1ItemStack.field_77994_a == 0) {
+               return new ItemStack(Items.field_151112_aM);
             }
-        }
-		if (par3EntityPlayer.isRiding() && par3EntityPlayer.ridingEntity instanceof EntityPigGold)
-        {
-            EntityPigGold var4 = (EntityPigGold)par3EntityPlayer.ridingEntity;
+         }
+      }
 
-            if (var4.getAIControlledByPlayer().isControlledByPlayer() && par1ItemStack.getMaxDamage() - par1ItemStack.getItemDamage() >= 7)
-            {
-                var4.getAIControlledByPlayer().boostSpeed();
-                par1ItemStack.damageItem(7, par3EntityPlayer);
-
-                if (par1ItemStack.stackSize == 0)
-                {
-                    return new ItemStack(Items.fishing_rod);
-                }
+      if (par3EntityPlayer.func_70115_ae() && par3EntityPlayer.field_70154_o instanceof EntityPigGold) {
+         EntityPigGold var4 = (EntityPigGold)par3EntityPlayer.field_70154_o;
+         if (var4.getAIControlledByPlayer().func_82633_h() && par1ItemStack.func_77958_k() - par1ItemStack.func_77960_j() >= 7) {
+            var4.getAIControlledByPlayer().func_82632_g();
+            par1ItemStack.func_77972_a(7, par3EntityPlayer);
+            if (par1ItemStack.field_77994_a == 0) {
+               return new ItemStack(Items.field_151112_aM);
             }
-        }
-		if (par3EntityPlayer.isRiding() && par3EntityPlayer.ridingEntity instanceof EntityPigLeather)
-        {
-            EntityPigLeather var4 = (EntityPigLeather)par3EntityPlayer.ridingEntity;
+         }
+      }
 
-            if (var4.getAIControlledByPlayer().isControlledByPlayer() && par1ItemStack.getMaxDamage() - par1ItemStack.getItemDamage() >= 7)
-            {
-                var4.getAIControlledByPlayer().boostSpeed();
-                par1ItemStack.damageItem(7, par3EntityPlayer);
-
-                if (par1ItemStack.stackSize == 0)
-                {
-                    return new ItemStack(Items.fishing_rod);
-                }
+      if (par3EntityPlayer.func_70115_ae() && par3EntityPlayer.field_70154_o instanceof EntityPigLeather) {
+         EntityPigLeather var4 = (EntityPigLeather)par3EntityPlayer.field_70154_o;
+         if (var4.getAIControlledByPlayer().func_82633_h() && par1ItemStack.func_77958_k() - par1ItemStack.func_77960_j() >= 7) {
+            var4.getAIControlledByPlayer().func_82632_g();
+            par1ItemStack.func_77972_a(7, par3EntityPlayer);
+            if (par1ItemStack.field_77994_a == 0) {
+               return new ItemStack(Items.field_151112_aM);
             }
-        }
-		if (par3EntityPlayer.isRiding() && par3EntityPlayer.ridingEntity instanceof EntityPigFriendlyIron)
-        {
-            EntityPigFriendlyIron var4 = (EntityPigFriendlyIron)par3EntityPlayer.ridingEntity;
+         }
+      }
 
-            if (var4.getAIControlledByPlayer().isControlledByPlayer() && par1ItemStack.getMaxDamage() - par1ItemStack.getItemDamage() >= 7)
-            {
-                var4.getAIControlledByPlayer().boostSpeed();
-                par1ItemStack.damageItem(7, par3EntityPlayer);
-
-                if (par1ItemStack.stackSize == 0)
-                {
-                    return new ItemStack(Items.fishing_rod);
-                }
+      if (par3EntityPlayer.func_70115_ae() && par3EntityPlayer.field_70154_o instanceof EntityPigFriendlyIron) {
+         EntityPigFriendlyIron var4 = (EntityPigFriendlyIron)par3EntityPlayer.field_70154_o;
+         if (var4.getAIControlledByPlayer().func_82633_h() && par1ItemStack.func_77958_k() - par1ItemStack.func_77960_j() >= 7) {
+            var4.getAIControlledByPlayer().func_82632_g();
+            par1ItemStack.func_77972_a(7, par3EntityPlayer);
+            if (par1ItemStack.field_77994_a == 0) {
+               return new ItemStack(Items.field_151112_aM);
             }
-        }
-		if (par3EntityPlayer.isRiding() && par3EntityPlayer.ridingEntity instanceof EntityPigFriendlyDiamond)
-        {
-            EntityPigFriendlyDiamond var4 = (EntityPigFriendlyDiamond)par3EntityPlayer.ridingEntity;
+         }
+      }
 
-            if (var4.getAIControlledByPlayer().isControlledByPlayer() && par1ItemStack.getMaxDamage() - par1ItemStack.getItemDamage() >= 7)
-            {
-                var4.getAIControlledByPlayer().boostSpeed();
-                par1ItemStack.damageItem(7, par3EntityPlayer);
-
-                if (par1ItemStack.stackSize == 0)
-                {
-                    return new ItemStack(Items.fishing_rod);
-                }
+      if (par3EntityPlayer.func_70115_ae() && par3EntityPlayer.field_70154_o instanceof EntityPigFriendlyDiamond) {
+         EntityPigFriendlyDiamond var4 = (EntityPigFriendlyDiamond)par3EntityPlayer.field_70154_o;
+         if (var4.getAIControlledByPlayer().func_82633_h() && par1ItemStack.func_77958_k() - par1ItemStack.func_77960_j() >= 7) {
+            var4.getAIControlledByPlayer().func_82632_g();
+            par1ItemStack.func_77972_a(7, par3EntityPlayer);
+            if (par1ItemStack.field_77994_a == 0) {
+               return new ItemStack(Items.field_151112_aM);
             }
-        }
-		if (par3EntityPlayer.isRiding() && par3EntityPlayer.ridingEntity instanceof EntityPigFriendlyGold)
-        {
-            EntityPigFriendlyGold var4 = (EntityPigFriendlyGold)par3EntityPlayer.ridingEntity;
+         }
+      }
 
-            if (var4.getAIControlledByPlayer().isControlledByPlayer() && par1ItemStack.getMaxDamage() - par1ItemStack.getItemDamage() >= 7)
-            {
-                var4.getAIControlledByPlayer().boostSpeed();
-                par1ItemStack.damageItem(7, par3EntityPlayer);
-
-                if (par1ItemStack.stackSize == 0)
-                {
-                    return new ItemStack(Items.fishing_rod);
-                }
+      if (par3EntityPlayer.func_70115_ae() && par3EntityPlayer.field_70154_o instanceof EntityPigFriendlyGold) {
+         EntityPigFriendlyGold var4 = (EntityPigFriendlyGold)par3EntityPlayer.field_70154_o;
+         if (var4.getAIControlledByPlayer().func_82633_h() && par1ItemStack.func_77958_k() - par1ItemStack.func_77960_j() >= 7) {
+            var4.getAIControlledByPlayer().func_82632_g();
+            par1ItemStack.func_77972_a(7, par3EntityPlayer);
+            if (par1ItemStack.field_77994_a == 0) {
+               return new ItemStack(Items.field_151112_aM);
             }
-        }
-		if (par3EntityPlayer.isRiding() && par3EntityPlayer.ridingEntity instanceof EntityPigFriendlyLeather)
-        {
-            EntityPigFriendlyLeather var4 = (EntityPigFriendlyLeather)par3EntityPlayer.ridingEntity;
+         }
+      }
 
-            if (var4.getAIControlledByPlayer().isControlledByPlayer() && par1ItemStack.getMaxDamage() - par1ItemStack.getItemDamage() >= 7)
-            {
-                var4.getAIControlledByPlayer().boostSpeed();
-                par1ItemStack.damageItem(7, par3EntityPlayer);
-
-                if (par1ItemStack.stackSize == 0)
-                {
-                    return new ItemStack(Items.fishing_rod);
-                }
+      if (par3EntityPlayer.func_70115_ae() && par3EntityPlayer.field_70154_o instanceof EntityPigFriendlyLeather) {
+         EntityPigFriendlyLeather var4 = (EntityPigFriendlyLeather)par3EntityPlayer.field_70154_o;
+         if (var4.getAIControlledByPlayer().func_82633_h() && par1ItemStack.func_77958_k() - par1ItemStack.func_77960_j() >= 7) {
+            var4.getAIControlledByPlayer().func_82632_g();
+            par1ItemStack.func_77972_a(7, par3EntityPlayer);
+            if (par1ItemStack.field_77994_a == 0) {
+               return new ItemStack(Items.field_151112_aM);
             }
-        }
-		if (par3EntityPlayer.isRiding() && par3EntityPlayer.ridingEntity instanceof EntityPig2)
-        {
-            EntityPig2 var4 = (EntityPig2)par3EntityPlayer.ridingEntity;
+         }
+      }
 
-            if (var4.getAIControlledByPlayer().isControlledByPlayer() && par1ItemStack.getMaxDamage() - par1ItemStack.getItemDamage() >= 7)
-            {
-                var4.getAIControlledByPlayer().boostSpeed();
-                par1ItemStack.damageItem(7, par3EntityPlayer);
-
-                if (par1ItemStack.stackSize == 0)
-                {
-                    return new ItemStack(Items.fishing_rod);
-                }
+      if (par3EntityPlayer.func_70115_ae() && par3EntityPlayer.field_70154_o instanceof EntityPig2) {
+         EntityPig2 var4 = (EntityPig2)par3EntityPlayer.field_70154_o;
+         if (var4.getAIControlledByPlayer().func_82633_h() && par1ItemStack.func_77958_k() - par1ItemStack.func_77960_j() >= 7) {
+            var4.getAIControlledByPlayer().func_82632_g();
+            par1ItemStack.func_77972_a(7, par3EntityPlayer);
+            if (par1ItemStack.field_77994_a == 0) {
+               return new ItemStack(Items.field_151112_aM);
             }
-        }
-		
-		
+         }
+      }
 
-        return par1ItemStack;
-    }
+      return par1ItemStack;
+   }
 }
