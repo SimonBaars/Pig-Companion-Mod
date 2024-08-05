@@ -1,0 +1,19 @@
+[
+{
+  "modid": "PigCompanionMod",
+  "name": "PigCompanionMod",
+  "description": "Cute armored piggy's in minecraft!",
+  "version": "1.6.4",
+  "credits": "Created by SimJoo",
+  "logoFile": "PigCompanionModLogo.png",
+  "mcversion": "1.6.4",
+  "url": "http://www.planetminecraft.com/mod/125-pig-companion-mod-v10-by-simjoo/",
+  "updateUrl": "",
+  "authors": [ "SimJoo" ],
+  "parent":"",
+  "screenshots": [],
+  "dependencies": [
+         "mod_MinecraftForge"
+]
+}
+]
