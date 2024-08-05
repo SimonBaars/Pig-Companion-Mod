@@ -9,102 +9,162 @@ import modid.pigcompanion.pigs.EntityPigFriendlyLeather;
 import modid.pigcompanion.pigs.EntityPigGold;
 import modid.pigcompanion.pigs.EntityPigIron;
 import modid.pigcompanion.pigs.EntityPigLeather;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.passive.EntityPig;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
-public class ItemSaddle2 extends yc {
-   public ItemSaddle2(int par1) {
-      super(par1);
-      this.cw = 1;
-      this.a(ww.e);
-   }
+public class ItemSaddle2 extends Item
+{
+    public ItemSaddle2(int par1)
+    {
+        super();
+        this.maxStackSize = 1;
+        this.setCreativeTab(CreativeTabs.tabTransport);
+    }
 
-   public boolean a(ye par1ItemStack, uf par2EntityPlayer, of par3EntityLivingBase) {
-      if (par3EntityLivingBase instanceof ry) {
-         ry entitypig = (ry)par3EntityLivingBase;
-         if (!entitypig.bT() && !entitypig.g_()) {
-            entitypig.i(true);
-            --par1ItemStack.b;
-         }
+    /**
+     * Returns true if the item can be used on the given entity, e.g. shears on sheep.
+     */
+    public boolean itemInteractionForEntity(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, EntityLivingBase par3EntityLivingBase)
+    {
+        if (par3EntityLivingBase instanceof EntityPig)
+        {
+            EntityPig entitypig = (EntityPig)par3EntityLivingBase;
 
-         return true;
-      } else if (par3EntityLivingBase instanceof EntityPigDiamond) {
-         EntityPigDiamond var3 = (EntityPigDiamond)par3EntityLivingBase;
-         if (!var3.getSaddled() && !var3.g_()) {
-            var3.setSaddled(true);
-            --par1ItemStack.b;
-         }
+            if (!entitypig.getSaddled() && !entitypig.isChild())
+            {
+                entitypig.setSaddled(true);
+                --par1ItemStack.stackSize;
+            }
 
-         return true;
-      } else if (par3EntityLivingBase instanceof EntityPigGold) {
-         EntityPigGold var3 = (EntityPigGold)par3EntityLivingBase;
-         if (!var3.getSaddled() && !var3.g_()) {
-            var3.setSaddled(true);
-            --par1ItemStack.b;
-         }
+            return true;
+        }
+        
+        if (par3EntityLivingBase instanceof EntityPigDiamond)
+        {
+            EntityPigDiamond var3 = (EntityPigDiamond)par3EntityLivingBase;
 
-         return true;
-      } else if (par3EntityLivingBase instanceof EntityPigLeather) {
-         EntityPigLeather var3 = (EntityPigLeather)par3EntityLivingBase;
-         if (!var3.getSaddled() && !var3.g_()) {
-            var3.setSaddled(true);
-            --par1ItemStack.b;
-         }
+            if (!var3.getSaddled() && !var3.isChild())
+            {
+                var3.setSaddled(true);
+                --par1ItemStack.stackSize;
+            }
 
-         return true;
-      } else if (par3EntityLivingBase instanceof EntityPigIron) {
-         EntityPigIron var3 = (EntityPigIron)par3EntityLivingBase;
-         if (!var3.getSaddled() && !var3.g_()) {
-            var3.setSaddled(true);
-            --par1ItemStack.b;
-         }
+            return true;
+        }
+		if (par3EntityLivingBase instanceof EntityPigGold)
+        {
+            EntityPigGold var3 = (EntityPigGold)par3EntityLivingBase;
 
-         return true;
-      } else if (par3EntityLivingBase instanceof EntityPigFriendlyDiamond) {
-         EntityPigFriendlyDiamond var3 = (EntityPigFriendlyDiamond)par3EntityLivingBase;
-         if (!var3.getSaddled() && !var3.g_()) {
-            var3.setSaddled(true);
-            --par1ItemStack.b;
-         }
+            if (!var3.getSaddled() && !var3.isChild())
+            {
+                var3.setSaddled(true);
+                --par1ItemStack.stackSize;
+            }
 
-         return true;
-      } else if (par3EntityLivingBase instanceof EntityPigFriendlyGold) {
-         EntityPigFriendlyGold var3 = (EntityPigFriendlyGold)par3EntityLivingBase;
-         if (!var3.getSaddled() && !var3.g_()) {
-            var3.setSaddled(true);
-            --par1ItemStack.b;
-         }
+            return true;
+        }
+		if (par3EntityLivingBase instanceof EntityPigLeather)
+        {
+            EntityPigLeather var3 = (EntityPigLeather)par3EntityLivingBase;
 
-         return true;
-      } else if (par3EntityLivingBase instanceof EntityPigFriendlyLeather) {
-         EntityPigFriendlyLeather var3 = (EntityPigFriendlyLeather)par3EntityLivingBase;
-         if (!var3.getSaddled() && !var3.g_()) {
-            var3.setSaddled(true);
-            --par1ItemStack.b;
-         }
+            if (!var3.getSaddled() && !var3.isChild())
+            {
+                var3.setSaddled(true);
+                --par1ItemStack.stackSize;
+            }
 
-         return true;
-      } else if (par3EntityLivingBase instanceof EntityPigFriendlyIron) {
-         EntityPigFriendlyIron var3 = (EntityPigFriendlyIron)par3EntityLivingBase;
-         if (!var3.getSaddled() && !var3.g_()) {
-            var3.setSaddled(true);
-            --par1ItemStack.b;
-         }
+            return true;
+        }
+		if (par3EntityLivingBase instanceof EntityPigIron)
+        {
+            EntityPigIron var3 = (EntityPigIron)par3EntityLivingBase;
 
-         return true;
-      } else if (par3EntityLivingBase instanceof EntityPig2) {
-         EntityPig2 var3 = (EntityPig2)par3EntityLivingBase;
-         if (!var3.getSaddled() && !var3.g_()) {
-            var3.setSaddled(true);
-            --par1ItemStack.b;
-         }
+            if (!var3.getSaddled() && !var3.isChild())
+            {
+                var3.setSaddled(true);
+                --par1ItemStack.stackSize;
+            }
 
-         return true;
-      } else {
-         return false;
-      }
-   }
+            return true;
+        }
+		if (par3EntityLivingBase instanceof EntityPigFriendlyDiamond)
+        {
+            EntityPigFriendlyDiamond var3 = (EntityPigFriendlyDiamond)par3EntityLivingBase;
 
-   public boolean a(ye par1ItemStack, of par2EntityLivingBase, of par3EntityLivingBase) {
-      this.a(par1ItemStack, (uf)null, par2EntityLivingBase);
-      return true;
-   }
+            if (!var3.getSaddled() && !var3.isChild())
+            {
+                var3.setSaddled(true);
+                --par1ItemStack.stackSize;
+            }
+
+            return true;
+        }
+		if (par3EntityLivingBase instanceof EntityPigFriendlyGold)
+        {
+            EntityPigFriendlyGold var3 = (EntityPigFriendlyGold)par3EntityLivingBase;
+
+            if (!var3.getSaddled() && !var3.isChild())
+            {
+                var3.setSaddled(true);
+                --par1ItemStack.stackSize;
+            }
+
+            return true;
+        }
+		if (par3EntityLivingBase instanceof EntityPigFriendlyLeather)
+        {
+            EntityPigFriendlyLeather var3 = (EntityPigFriendlyLeather)par3EntityLivingBase;
+
+            if (!var3.getSaddled() && !var3.isChild())
+            {
+                var3.setSaddled(true);
+                --par1ItemStack.stackSize;
+            }
+
+            return true;
+        }
+		if (par3EntityLivingBase instanceof EntityPigFriendlyIron)
+        {
+            EntityPigFriendlyIron var3 = (EntityPigFriendlyIron)par3EntityLivingBase;
+
+            if (!var3.getSaddled() && !var3.isChild())
+            {
+                var3.setSaddled(true);
+                --par1ItemStack.stackSize;
+            }
+
+            return true;
+        }
+		if (par3EntityLivingBase instanceof EntityPig2)
+        {
+            EntityPig2 var3 = (EntityPig2)par3EntityLivingBase;
+
+            if (!var3.getSaddled() && !var3.isChild())
+            {
+                var3.setSaddled(true);
+                --par1ItemStack.stackSize;
+            }
+
+            return true;
+        }
+		
+        else
+        {
+            return false;
+        }
+    }
+
+    /**
+     * Current implementations of this method in child classes do not use the entry argument beside ev. They just raise
+     * the damage on the stack.
+     */
+    public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase)
+    {
+        this.itemInteractionForEntity(par1ItemStack, (EntityPlayer)null, par2EntityLivingBase);
+        return true;
+    }
 }

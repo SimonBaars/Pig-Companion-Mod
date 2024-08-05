@@ -1,130 +1,253 @@
 package modid.pigcompanion.pigs;
 
 import modid.pigcompanion.core.PigCompanionMod;
+import net.minecraft.entity.EntityAgeable;
+import net.minecraft.entity.ai.EntityAIControlledByPlayer;
+import net.minecraft.entity.ai.EntityAIFollowParent;
+import net.minecraft.entity.ai.EntityAILookIdle;
+import net.minecraft.entity.ai.EntityAIMate;
+import net.minecraft.entity.ai.EntityAIPanic;
+import net.minecraft.entity.ai.EntityAISwimming;
+import net.minecraft.entity.ai.EntityAITempt;
+import net.minecraft.entity.ai.EntityAIWander;
+import net.minecraft.entity.ai.EntityAIWatchClosest;
+import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.entity.monster.EntityPigZombie;
+import net.minecraft.entity.passive.EntityAnimal;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.stats.AchievementList;
+import net.minecraft.world.World;
 
-public class EntityPigGold extends rp {
-   private final pl aiControlledByPlayer;
+public class EntityPigGold extends EntityAnimal
+{
+private final EntityAIControlledByPlayer aiControlledByPlayer;
+    public EntityPigGold(World par1World)
+    {
+        super(par1World);
+        //texture = "/pigs/pigarmorgold.png";
+        setSize(0.9F, 0.9F);
+        getNavigator().setAvoidsWater(true);
+        float f = 0.25F;
+        tasks.addTask(0, new EntityAISwimming(this));
+		this.tasks.addTask(4, new EntityAITempt(this, 0.3F, PigCompanionMod.potatoOnAStick, false));
+        this.tasks.addTask(4, new EntityAITempt(this, 0.3F, Items.potato, false));
+        tasks.addTask(1, new EntityAIPanic(this, 0.38F));
+		tasks.addTask(2, this.aiControlledByPlayer = new EntityAIControlledByPlayer(this, 0.34F));
+        tasks.addTask(2, new EntityAIMate(this, f));
+        tasks.addTask(3, new EntityAITempt(this, 0.4F, Items.wheat, false));
+        tasks.addTask(4, new EntityAIFollowParent(this, 0.28F));
+        tasks.addTask(5, new EntityAIWander(this, f));
+        tasks.addTask(6, new EntityAIWatchClosest(this, EntityPlayer.class, 6F));
+        tasks.addTask(7, new EntityAILookIdle(this));
+    }
 
-   public EntityPigGold(abw par1World) {
-      super(par1World);
-      this.a(0.9F, 0.9F);
-      this.k().a(true);
-      float f = 0.25F;
-      this.c.a(0, new pp(this));
-      this.c.a(4, new qu(this, 0.30000001192092896D, PigCompanionMod.potatoOnAStick.cv, false));
-      this.c.a(4, new qu(this, 0.30000001192092896D, yc.bN.cv, false));
-      this.c.a(1, new qj(this, 0.3799999952316284D));
-      this.c.a(2, this.aiControlledByPlayer = new pl(this, 0.34F));
-      this.c.a(2, new pk(this, (double)f));
-      this.c.a(3, new qu(this, 0.4000000059604645D, yc.V.cv, false));
-      this.c.a(4, new pr(this, 0.2800000011920929D));
-      this.c.a(5, new qm(this, (double)f));
-      this.c.a(6, new px(this, uf.class, 6.0F));
-      this.c.a(7, new ql(this));
-   }
+    /**
+     * Returns true if the newer Entity AI code should be run
+     */
+    public boolean isAIEnabled()
+    {
+        return true;
+    }
+/**
+    public int getMaxHealth()
+    {
+        return 30;
+    }
+    */
+	public boolean canBeSteered()
+    {
+        ItemStack var1 = ((EntityPlayer)this.riddenByEntity).getHeldItem();
+        return var1 != null && var1.itemID == PigCompanionMod.potatoOnAStick;
+    }
+	/**
+	public EntityAgeable func_90011_a(EntityAgeable par1EntityAgeable)
+    {
+        return this.spawnBabyAnimal(par1EntityAgeable);
+    }
+	public EntityPigGold spawnBabyAnimal(EntityAgeable par1EntityAgeable)
+    {
+        return new EntityPigGold(this.worldObj);
+    }
+    */
+	public EntityAIControlledByPlayer getAIControlledByPlayer()
+    {
+        return this.aiControlledByPlayer;
+    }
 
-   public boolean bf() {
-      return true;
-   }
+    protected void entityInit()
+    {
+        super.entityInit();
+        dataWatcher.addObject(16, Byte.valueOf((byte)0));
+    }
 
-   public boolean by() {
-      ye var1 = ((uf)this.n).aZ();
-      return var1 != null && var1.d == PigCompanionMod.potatoOnAStick.cv;
-   }
+    /**
+     * (abstract) Protected helper method to write subclass entity data to NBT.
+     */
+    public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound)
+    {
+        super.writeEntityToNBT(par1NBTTagCompound);
+        par1NBTTagCompound.setBoolean("Saddle", getSaddled());
+    }
 
-   public pl getAIControlledByPlayer() {
-      return this.aiControlledByPlayer;
-   }
+    /**
+     * (abstract) Protected helper method to read subclass entity data from NBT.
+     */
+    public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound)
+    {
+        super.readEntityFromNBT(par1NBTTagCompound);
+        setSaddled(par1NBTTagCompound.getBoolean("Saddle"));
+    }
 
-   protected void a() {
-      super.a();
-      this.ah.a(16, (byte)0);
-   }
+    /**
+     * Returns the sound this mob makes while it's alive.
+     */
+    protected String getLivingSound()
+    {
+        return "mob.pig";
+    }
 
-   public void b(by par1NBTTagCompound) {
-      super.b(par1NBTTagCompound);
-      par1NBTTagCompound.a("Saddle", this.getSaddled());
-   }
+    /**
+     * Returns the sound this mob makes when it is hurt.
+     */
+    protected String getHurtSound()
+    {
+        return "mob.pig";
+    }
 
-   public void a(by par1NBTTagCompound) {
-      super.a(par1NBTTagCompound);
-      this.setSaddled(par1NBTTagCompound.n("Saddle"));
-   }
+    /**
+     * Returns the sound this mob makes on death.
+     */
+    protected String getDeathSound()
+    {
+        return "mob.pigdeath";
+    }
 
-   protected String r() {
-      return "mob.pig";
-   }
+    /**
+     * Called when a player interacts with a mob. e.g. gets milk from a cow, gets into the saddle on a pig.
+     */
+    public boolean interact(EntityPlayer par1EntityPlayer)
+    {
+		ItemStack var2 = par1EntityPlayer.inventory.getCurrentItem();
+		
+		if (var2 != null && var2.itemID == Items.wheat_seeds && this.getGrowingAge() >= 0)
+        {
+            this.setDead();
 
-   protected String aO() {
-      return "mob.pig";
-   }
+            if (!this.worldObj.isRemote)
+            {
+                EntityPigFriendlyGold var3 = new EntityPigFriendlyGold(this.worldObj);
+                var3.setLocationAndAngles(this.posX, this.posY, this.posZ, this.rotationYaw, this.rotationPitch);
+				par1EntityPlayer.inventory.consumeInventoryItem(Items.wheat_seeds);
+                //var3.setEntityHealth(this.getHealth());
+                var3.renderYawOffset = this.renderYawOffset;
+                this.worldObj.spawnEntityInWorld(var3);
+            }
 
-   protected String aP() {
-      return "mob.pigdeath";
-   }
+            return true;
+        }
+		
+        if (!super.interact(par1EntityPlayer))
+        {
+            if (getSaddled() && !worldObj.isRemote && (riddenByEntity == null || riddenByEntity == par1EntityPlayer))
+            {
+                par1EntityPlayer.mountEntity(this);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+		else
+		{
+			return true;
+		}
+    }
 
-   public boolean a(uf par1EntityPlayer) {
-      ye var2 = par1EntityPlayer.bn.h();
-      if (var2 != null && var2.d == yc.U.cv && this.b() >= 0) {
-         this.x();
-         if (!this.q.I) {
-            EntityPigFriendlyGold var3 = new EntityPigFriendlyGold(this.q);
-            var3.b(this.u, this.v, this.w, this.A, this.B);
-            par1EntityPlayer.bn.d(yc.U.cv);
-            var3.aN = this.aN;
-            this.q.d(var3);
-         }
+    /**
+     * Returns the item ID for the item the mob drops on death.
+     */
+    protected Item getDropItemId()
+    {
+        if (isBurning())
+        {
+            return Items.cooked_porkchop;
+        }
+        else
+        {
+            return Items.porkchop;
+        }
+    }
 
-         return true;
-      } else if (super.a(par1EntityPlayer)) {
-         return true;
-      } else if (!this.getSaddled() || this.q.I || this.n != null && this.n != par1EntityPlayer) {
-         return false;
-      } else {
-         par1EntityPlayer.a(this);
-         return true;
-      }
-   }
+    /**
+     * Returns true if the pig is saddled.
+     */
+    public boolean getSaddled()
+    {
+        return (dataWatcher.getWatchableObjectByte(16) & 1) != 0;
+    }
 
-   protected int s() {
-      return this.af() ? yc.at.cv : yc.as.cv;
-   }
+    /**
+     * Set or remove the saddle of the pig.
+     */
+    public void setSaddled(boolean par1)
+    {
+        if (par1)
+        {
+            dataWatcher.updateObject(16, Byte.valueOf((byte)1));
+        }
+        else
+        {
+            dataWatcher.updateObject(16, Byte.valueOf((byte)0));
+        }
+    }
 
-   public boolean getSaddled() {
-      return (this.ah.a(16) & 1) != 0;
-   }
+    /**
+     * Called when a lightning bolt hits the entity.
+     */
+    public void onStruckByLightning(EntityLightningBolt par1EntityLightningBolt)
+    {
+        if (worldObj.isRemote)
+        {
+            return;
+        }
+        else
+        {
+            EntityPigZombie entitypigzombie = new EntityPigZombie(worldObj);
+            entitypigzombie.setLocationAndAngles(posX, posY, posZ, rotationYaw, rotationPitch);
+            worldObj.spawnEntityInWorld(entitypigzombie);
+            setDead();
+            return;
+        }
+    }
 
-   public void setSaddled(boolean par1) {
-      if (par1) {
-         this.ah.b(16, (byte)1);
-      } else {
-         this.ah.b(16, (byte)0);
-      }
+    /**
+     * Called when the mob is falling. Calculates and applies fall damage.
+     */
+    protected void fall(float par1)
+    {
+        super.fall(par1);
 
-   }
+        if (par1 > 5F && (riddenByEntity instanceof EntityPlayer))
+        {
+            ((EntityPlayer)riddenByEntity).triggerAchievement(AchievementList.flyPig);
+        }
+    }
 
-   public void a(sp par1EntityLightningBolt) {
-      if (!this.q.I) {
-         tn entitypigzombie = new tn(this.q);
-         entitypigzombie.b(this.u, this.v, this.w, this.A, this.B);
-         this.q.d(entitypigzombie);
-         this.x();
-      }
-   }
-
-   protected void b(float par1) {
-      super.b(par1);
-      if (par1 > 5.0F && this.n instanceof uf) {
-         ((uf)this.n).a(kp.u);
-      }
-
-   }
-
-   public EntityPigGold spawnBabyAnimal(nk par1EntityAgeable) {
-      return new EntityPigGold(this.q);
-   }
-
-   public nk a(nk par1EntityAgeable) {
-      return this.spawnBabyAnimal(par1EntityAgeable);
-   }
+    /**
+     * This function is used when two same-species animals in 'love mode' breed to generate the new baby animal.
+     */
+    public EntityPigGold spawnBabyAnimal(EntityAgeable par1EntityAgeable)
+    {
+        return new EntityPigGold(this.worldObj);
+    }
+	
+	public EntityAgeable createChild(EntityAgeable par1EntityAgeable)
+    {
+        return this.spawnBabyAnimal(par1EntityAgeable);
+    }
 }

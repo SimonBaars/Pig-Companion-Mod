@@ -1,44 +1,71 @@
 package modid.pigcompanion.pigs;
 
-public class RenderPigGold extends bhe {
-   private static final bjo field_110888_a = new bjo("textures/entity/pig/pig_saddle.png");
-   private static final bjo field_110887_f = new bjo("textures/pigs/pigarmorgold.png");
+import net.minecraft.client.model.ModelBase;
+import net.minecraft.client.renderer.entity.RenderLiving;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLiving;
+import net.minecraft.util.ResourceLocation;
 
-   public RenderPigGold(bbo par1ModelBase, bbo par2ModelBase, float par3) {
-      super(par1ModelBase, par3);
-      this.a(par2ModelBase);
-   }
+public class RenderPigGold extends RenderLiving
+{
+	private static final ResourceLocation field_110888_a = new ResourceLocation("textures/entity/pig/pig_saddle.png");
+    private static final ResourceLocation field_110887_f = new ResourceLocation("textures/pigs/pigarmorgold.png");
+	
+    public RenderPigGold(ModelBase par1ModelBase, ModelBase par2ModelBase, float par3)
+    {
+        super(par1ModelBase, par3);
+        setRenderPassModel(par2ModelBase);
+    }
 
-   protected int renderSaddledPig(EntityPigGold par1EntityPig, int par2, float par3) {
-      if (par2 == 0 && par1EntityPig.getSaddled()) {
-         this.a(field_110888_a);
-         return 1;
-      } else {
-         return -1;
-      }
-   }
+    protected int renderSaddledPig(EntityPigGold par1EntityPig, int par2, float par3)
+    {
+        if (par2 == 0 && par1EntityPig.getSaddled())
+        {
+            this.bindTexture(field_110888_a);
+            return 1;
+        }
+        else
+        {
+            return -1;
+        }
+    }
 
-   protected bjo func_110886_a(EntityPigGold par1EntityPig) {
-      return field_110887_f;
-   }
+    protected ResourceLocation func_110886_a(EntityPigGold par1EntityPig)
+    {
+        return field_110887_f;
+    }
 
-   public void func_40286_a(EntityPigGold par1EntityPig, double par2, double par4, double par6, float par8, float par9) {
-      super.a(par1EntityPig, par2, par4, par6, par8, par9);
-   }
+    public void func_40286_a(EntityPigGold par1EntityPig, double par2, double par4, double par6, float par8, float par9)
+    {
+        super.doRender(par1EntityPig, par2, par4, par6, par8, par9);
+    }
 
-   protected int shouldRenderPass(og par1EntityLiving, int par2, float par3) {
-      return this.renderSaddledPig((EntityPigGold)par1EntityLiving, par2, par3);
-   }
+    /**
+     * Queries whether should render the specified pass or not.
+     */
+    protected int shouldRenderPass(EntityLiving par1EntityLiving, int par2, float par3)
+    {
+        return renderSaddledPig((EntityPigGold)par1EntityLiving, par2, par3);
+    }
 
-   public void a(og par1EntityLiving, double par2, double par4, double par6, float par8, float par9) {
-      this.func_40286_a((EntityPigGold)par1EntityLiving, par2, par4, par6, par8, par9);
-   }
+    public void doRenderLiving(EntityLiving par1EntityLiving, double par2, double par4, double par6, float par8, float par9)
+    {
+        func_40286_a((EntityPigGold)par1EntityLiving, par2, par4, par6, par8, par9);
+    }
 
-   public void a(nn par1Entity, double par2, double par4, double par6, float par8, float par9) {
-      this.func_40286_a((EntityPigGold)par1Entity, par2, par4, par6, par8, par9);
-   }
-
-   protected bjo a(nn par1Entity) {
-      return this.func_110886_a((EntityPigGold)par1Entity);
-   }
+    /**
+     * Actually renders the given argument. This is a synthetic bridge method, always casting down its argument and then
+     * handing it off to a worker function which does the actual work. In all probabilty, the class Render is generic
+     * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
+     * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
+     */
+    public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
+    {
+        func_40286_a((EntityPigGold)par1Entity, par2, par4, par6, par8, par9);
+    }
+	
+	protected ResourceLocation getEntityTexture(Entity par1Entity)
+    {
+        return this.func_110886_a((EntityPigGold)par1Entity);
+    }
 }
