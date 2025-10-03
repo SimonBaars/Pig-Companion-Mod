@@ -1,5 +1,28 @@
-## Pig Companion Mod 1.6.4
-A mod about taming pigs to make them fight for you.
+## Pig Companion Mod 2.0.0
+
+[![Build and Test](https://github.com/SimonBaars/Pig-Companion-Mod/actions/workflows/build.yml/badge.svg)](https://github.com/SimonBaars/Pig-Companion-Mod/actions/workflows/build.yml)
+
+A mod about taming pigs to make them fight for you!
+
+**Now available for Minecraft 1.21.1 with Fabric!**
+
+### Features
+- **Armored Pigs**: Leather, Iron, Gold, and Diamond armored variants
+- **Pig Companions**: Tame pigs to fight alongside you
+- **Custom Items**: Potato on a Stick and Upgraded Saddle
+
+### Installation
+1. Install [Fabric Loader](https://fabricmc.net/use/)
+2. Install [Fabric API](https://modrinth.com/mod/fabric-api)
+3. Download the latest release
+4. Place the mod JAR in your `mods` folder
+
+### Building from Source
+```bash
+./gradlew build
+```
+
+The built JAR will be in `build/libs/`
 
 ![image](https://github.com/user-attachments/assets/f6fdb95d-9c55-486f-b1da-e7143551e555)
 

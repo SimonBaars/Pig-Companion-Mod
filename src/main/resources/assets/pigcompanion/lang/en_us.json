@@ -1,0 +1,14 @@
+{
+"item.pigcompanion.potato_on_a_stick": "Potato on a Stick",
+"item.pigcompanion.upgraded_saddle": "Upgraded Saddle",
+
+"entity.pigcompanion.pig_leather": "Leather Armored Pig",
+"entity.pigcompanion.pig_iron": "Iron Armored Pig",
+"entity.pigcompanion.pig_gold": "Gold Armored Pig",
+"entity.pigcompanion.pig_diamond": "Diamond Armored Pig",
+
+"entity.pigcompanion.pig_companion_leather": "Leather Pig Companion",
+"entity.pigcompanion.pig_companion_iron": "Iron Pig Companion",
+"entity.pigcompanion.pig_companion_gold": "Gold Pig Companion",
+"entity.pigcompanion.pig_companion_diamond": "Diamond Pig Companion"
+}

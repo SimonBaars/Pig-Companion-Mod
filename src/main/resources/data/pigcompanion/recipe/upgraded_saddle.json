@@ -1,0 +1,12 @@
+{
+"type": "minecraft:crafting_shapeless",
+"ingredients": [
+{
+"item": "minecraft:saddle"
+}
+],
+"result": {
+"id": "pigcompanion:upgraded_saddle",
+"count": 1
+}
+}
