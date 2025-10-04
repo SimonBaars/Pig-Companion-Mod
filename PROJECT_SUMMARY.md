@@ -86,7 +86,7 @@ Pig-Companion-Mod/
 ```gradle
 minecraft: 1.21.1
 fabric-loader: 0.16.9
-fabric-api: 0.110.5+1.21.1
+fabric-api: 0.116.6+1.21.1
 yarn-mappings: 1.21.1+build.1
 ```
 

@@ -3,7 +3,7 @@
 ## Prerequisites
 - Minecraft 1.21.1
 - Fabric Loader 0.16.9+
-- Fabric API 0.110.5+
+- Fabric API 0.116.6+
 - Java 21
 
 ## Local Build Testing
