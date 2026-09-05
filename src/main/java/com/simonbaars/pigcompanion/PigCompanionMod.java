@@ -3,6 +3,7 @@ package com.simonbaars.pigcompanion;
 import com.simonbaars.pigcompanion.entity.ModEntities;
 import com.simonbaars.pigcompanion.item.ModItems;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,8 +14,12 @@ public class PigCompanionMod implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		LOGGER.info("Initializing Pig Companion Mod");
-		
+
 		ModItems.register();
 		ModEntities.register();
+	}
+
+	public static Identifier id(String path) {
+		return Identifier.fromNamespaceAndPath(MOD_ID, path);
 	}
 }
