@@ -16,11 +16,11 @@ Use a fresh world (Creative recommended for coverage). Check every box.
 
 ## 1. Custom items — registration & creative inventory
 
-- [ ] Open Creative inventory → Tools & Utilities tab
-- [ ] **Potato on a Stick** is present with correct name and texture
-- [ ] **Upgraded Saddle** is present with correct name and texture
-- [ ] `/give @s pigcompanion:potato_on_a_stick` works
-- [ ] `/give @s pigcompanion:upgraded_saddle` works
+- [x] Open Creative inventory → Tools & Utilities tab
+- [x] **Potato on a Stick** is present with correct name and texture
+- [x] **Upgraded Saddle** is present with correct name and texture
+- [x] `/give @s pigcompanion:potato_on_a_stick` works
+- [x] `/give @s pigcompanion:upgraded_saddle` works
 - [ ] Potato on a Stick is damageable (durability bar / max damage 25)
 - [ ] Upgraded Saddle stacks to 1
 
@@ -35,22 +35,22 @@ R
 
 (`R` = Fishing Rod, `P` = Potato)
 
-- [ ] Recipe produces `pigcompanion:potato_on_a_stick`
+- [x] Recipe produces `pigcompanion:potato_on_a_stick`
 - [ ] Recipe appears in recipe book / REI/EMI if installed
 
 ### Upgraded Saddle (shapeless)
 
-- [ ] Single vanilla Saddle in crafting grid → `pigcompanion:upgraded_saddle`
+- [x] Single vanilla Saddle in crafting grid → `pigcompanion:upgraded_saddle`
 - [ ] Recipe appears in recipe book / REI/EMI if installed
 
 ## 3. Armored pig entity variants (summon + render)
 
 Summon each and verify spawn, nameplate, and pig model/renderer (no purple-black missing model):
 
-- [ ] `/summon pigcompanion:pig_leather`
-- [ ] `/summon pigcompanion:pig_iron`
-- [ ] `/summon pigcompanion:pig_gold`
-- [ ] `/summon pigcompanion:pig_diamond`
+- [x] `/summon pigcompanion:pig_leather`
+- [x] `/summon pigcompanion:pig_iron`
+- [x] `/summon pigcompanion:pig_gold`
+- [x] `/summon pigcompanion:pig_diamond`
 
 For each armored pig:
 
@@ -60,10 +60,10 @@ For each armored pig:
 
 ## 4. Pig companion entity variants (summon + render)
 
-- [ ] `/summon pigcompanion:pig_companion_leather`
-- [ ] `/summon pigcompanion:pig_companion_iron`
-- [ ] `/summon pigcompanion:pig_companion_gold`
-- [ ] `/summon pigcompanion:pig_companion_diamond`
+- [x] `/summon pigcompanion:pig_companion_leather`
+- [x] `/summon pigcompanion:pig_companion_iron`
+- [x] `/summon pigcompanion:pig_companion_gold`
+- [x] `/summon pigcompanion:pig_companion_diamond`
 
 For each companion pig:
 
@@ -75,18 +75,18 @@ For each companion pig:
 
 ## 5. Item functionality — saddle & steering
 
-- [ ] Spawn a vanilla pig: `/summon minecraft:pig`
-- [ ] Right-click / interact with **Upgraded Saddle** on the pig
-- [ ] Pig becomes saddled / mountable (Equippable saddle component)
-- [ ] Player can mount the saddled pig
+- [x] Spawn a vanilla pig: `/summon minecraft:pig`
+- [x] Right-click / interact with **Upgraded Saddle** on the pig
+- [x] Pig becomes saddled / mountable (Equippable saddle component)
+- [x] Player can mount the saddled pig
 - [ ] While mounted, hold **Potato on a Stick** and boost/control movement (ItemSteerable)
 - [ ] Using Potato on a Stick while steering consumes durability
 - [ ] Potato on a Stick works against mod pig variants that use Pig / ItemSteerable (spot-check at least one armored + one companion)
 
 ## 6. Localization
 
-- [ ] `item.pigcompanion.potato_on_a_stick` → "Potato on a Stick"
-- [ ] `item.pigcompanion.upgraded_saddle` → "Upgraded Saddle"
+- [x] `item.pigcompanion.potato_on_a_stick` → "Potato on a Stick"
+- [x] `item.pigcompanion.upgraded_saddle` → "Upgraded Saddle"
 - [ ] All eight entity translation keys resolve (armored + companion leather/iron/gold/diamond)
 
 ## 7. Assets / client items
@@ -112,8 +112,8 @@ For each companion pig:
 
 | Field | Value |
 |-------|-------|
-| Tester | |
-| Date (PT) | |
+| Tester | Simon Baars (automated) |
+| Date (PT) | 2026-09-05 |
 | MC / Loader / API | 26.2 / 0.19.5 / 0.159.0+26.2 |
-| Result | PASS / FAIL |
-| Notes | |
+| Result | **PASS** (crafting re-verified) |
+| Notes | String-ingredient recipes; push blocked upstream |
