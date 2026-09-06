@@ -2,21 +2,20 @@ package com.simonbaars.pigcompanion.client;
 
 import com.simonbaars.pigcompanion.entity.ModEntities;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.minecraft.client.render.entity.PigEntityRenderer;
+import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.PigRenderer;
 
 public class PigCompanionModClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
-		// Register entity renderers
-		EntityRendererRegistry.register(ModEntities.PIG_LEATHER, PigEntityRenderer::new);
-		EntityRendererRegistry.register(ModEntities.PIG_IRON, PigEntityRenderer::new);
-		EntityRendererRegistry.register(ModEntities.PIG_GOLD, PigEntityRenderer::new);
-		EntityRendererRegistry.register(ModEntities.PIG_DIAMOND, PigEntityRenderer::new);
-		
-		EntityRendererRegistry.register(ModEntities.PIG_COMPANION_LEATHER, PigEntityRenderer::new);
-		EntityRendererRegistry.register(ModEntities.PIG_COMPANION_IRON, PigEntityRenderer::new);
-		EntityRendererRegistry.register(ModEntities.PIG_COMPANION_GOLD, PigEntityRenderer::new);
-		EntityRendererRegistry.register(ModEntities.PIG_COMPANION_DIAMOND, PigEntityRenderer::new);
+		EntityRenderers.register(ModEntities.PIG_LEATHER, PigRenderer::new);
+		EntityRenderers.register(ModEntities.PIG_IRON, PigRenderer::new);
+		EntityRenderers.register(ModEntities.PIG_GOLD, PigRenderer::new);
+		EntityRenderers.register(ModEntities.PIG_DIAMOND, PigRenderer::new);
+
+		EntityRenderers.register(ModEntities.PIG_COMPANION_LEATHER, PigRenderer::new);
+		EntityRenderers.register(ModEntities.PIG_COMPANION_IRON, PigRenderer::new);
+		EntityRenderers.register(ModEntities.PIG_COMPANION_GOLD, PigRenderer::new);
+		EntityRenderers.register(ModEntities.PIG_COMPANION_DIAMOND, PigRenderer::new);
 	}
 }

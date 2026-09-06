@@ -1,19 +1,15 @@
 {
-"type": "minecraft:crafting_shaped",
-"pattern": [
-"R ",
-" P"
-],
-"key": {
-"R": {
-"item": "minecraft:fishing_rod"
-},
-"P": {
-"item": "minecraft:potato"
-}
-},
-"result": {
-"id": "pigcompanion:potato_on_a_stick",
-"count": 1
-}
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "R ",
+    " P"
+  ],
+  "key": {
+    "R": "minecraft:fishing_rod",
+    "P": "minecraft:potato"
+  },
+  "result": {
+    "id": "pigcompanion:potato_on_a_stick",
+    "count": 1
+  }
 }
