@@ -1,12 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "equipment",
   "pattern": [
-    "R ",
-    " P"
+    "# ",
+    " X"
   ],
   "key": {
-    "R": "minecraft:fishing_rod",
-    "P": "minecraft:potato"
+    "#": {
+      "item": "minecraft:potato"
+    },
+    "X": {
+      "item": "minecraft:fishing_rod"
+    }
   },
   "result": {
     "id": "pigcompanion:potato_on_a_stick",
