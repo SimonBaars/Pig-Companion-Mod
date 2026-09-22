@@ -49,9 +49,7 @@ public class SuperPigEntity extends ArmoredPigEntity {
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob entity) {
-        // TODO: MC 26.2 - EntityType.create() signature changed
-        // Need to use new spawn API
-        return null;
+        return new SuperPigEntity(ModEntities.SUPER_PIG, world);
     }
 
     @Override

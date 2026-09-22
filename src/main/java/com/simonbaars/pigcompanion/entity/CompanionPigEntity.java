@@ -14,6 +14,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.NearestAttackableTargetGoal;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
@@ -54,9 +55,13 @@ public class CompanionPigEntity extends Animal {
         this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(8, new MeleeAttackGoal(this, 1.0, true));
 
-        // TODO: MC 26.2 - NearestAttackableTargetGoal constructor signature changed
-        // Attack hostile mobs - temporarily disabled
-        // this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<Mob>(this, Mob.class, true, (entity) -> entity instanceof Enemy));
+        // Attack hostile mobs (Enemy interface = hostile mobs like zombies, skeletons, creepers)
+        this.targetSelector.addGoal(1, new NearestAttackableTargetGoal<Mob>(this, Mob.class, true, false) {
+            @Override
+            protected boolean canAttack(LivingEntity target, TargetingConditions conditions) {
+                return target instanceof Enemy && super.canAttack(target, conditions);
+            }
+        });
     }
 
     @Override
@@ -67,9 +72,7 @@ public class CompanionPigEntity extends Animal {
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob entity) {
-        // TODO: MC 26.2 - EntityType.create() signature changed
-        // Need to use new spawn API
-        return null;
+        return new CompanionPigEntity(ModEntities.PIG_COMPANION_LEATHER, world, 0);
     }
 
     public boolean isSaddled() {
@@ -88,18 +91,14 @@ public class CompanionPigEntity extends Animal {
     }
 
     public void addAdditionalSaveData(CompoundTag nbt) {
-        // TODO: MC 26.2 - NBT API changed to ValueOutput
-        // Temporarily disabled
-        // super.addAdditionalSaveData(nbt);
-        // nbt.putBoolean("Saddle", this.isSaddled());
-        // nbt.putInt("ArmorTier", this.armorTier);
+        // Note: Not calling super - MC 26.2 changed to ValueOutput, but we still receive CompoundTag
+        nbt.putBoolean("Saddle", this.isSaddled());
+        nbt.putInt("ArmorTier", this.armorTier);
     }
 
     public void readAdditionalSaveData(CompoundTag nbt) {
-        // TODO: MC 26.2 - NBT API changed to ValueInput
-        // Temporarily disabled
-        // super.readAdditionalSaveData(nbt);
-        // this.setSaddled(nbt.getBoolean("Saddle"));
+        // Note: Not calling super - MC 26.2 changed to ValueInput, but we still receive CompoundTag
+        this.setSaddled(nbt.getBoolean("Saddle").orElse(false));
     }
 
     public int getArmorTier() {

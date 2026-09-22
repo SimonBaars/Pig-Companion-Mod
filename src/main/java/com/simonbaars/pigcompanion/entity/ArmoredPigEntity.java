@@ -49,9 +49,7 @@ public class ArmoredPigEntity extends Animal {
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel world, AgeableMob entity) {
-        // TODO: MC 26.2 - EntityType.create() signature changed
-        // Need to use new spawn API
-        return null;
+        return new ArmoredPigEntity(ModEntities.PIG_LEATHER, world);
     }
 
     public boolean isSaddled() {
@@ -70,17 +68,13 @@ public class ArmoredPigEntity extends Animal {
     }
 
     public void addAdditionalSaveData(CompoundTag nbt) {
-        // TODO: MC 26.2 - NBT API changed to ValueOutput  
-        // Temporarily disabled
-        // super.addAdditionalSaveData(nbt);
-        // nbt.putBoolean("Saddle", this.isSaddled());
+        // Note: Not calling super - MC 26.2 changed to ValueOutput, but we still receive CompoundTag
+        nbt.putBoolean("Saddle", this.isSaddled());
     }
 
     public void readAdditionalSaveData(CompoundTag nbt) {
-        // TODO: MC 26.2 - NBT API changed to ValueInput
-        // Temporarily disabled
-        // super.readAdditionalSaveData(nbt);
-        // this.setSaddled(nbt.getBoolean("Saddle"));
+        // Note: Not calling super - MC 26.2 changed to ValueInput, but we still receive CompoundTag
+        this.setSaddled(nbt.getBoolean("Saddle").orElse(false));
     }
 
     @Override
