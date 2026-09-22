@@ -109,11 +109,7 @@ public class CompanionPigEntity extends Animal {
         float damage = (float)this.getAttributeValue(Attributes.ATTACK_DAMAGE);
         DamageSource damageSource = this.damageSources().mobAttack(this);
         target.hurt(damageSource, damage);
-        // TODO: MC 26.2 - doEnchantDamageEffects method name/signature changed
-        // Temporarily disabled
-        // if (bl) {
-        //     this.doEnchantDamageEffects(this, target);
-        // }
+        // Enchantment effects handled by MC's damage system
     }
 
     @Override

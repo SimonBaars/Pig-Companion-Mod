@@ -11,7 +11,6 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.FoodOnAStickItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.equipment.Equippable;
 
@@ -20,14 +19,12 @@ public class ModItems {
 			ResourceKey.create(Registries.CREATIVE_MODE_TAB, Identifier.withDefaultNamespace("tools_and_utilities"));
 
 	public static final Item POTATO_ON_A_STICK = register("potato_on_a_stick",
-			properties -> new FoodOnAStickItem<>(EntityTypes.PIG, 7, properties),
+			properties -> new PotatoOnAStickItem(properties),
 			new Item.Properties().stacksTo(1).durability(25));
 
 	public static final Item UPGRADED_SADDLE = register("upgraded_saddle",
-			Item::new,
-			new Item.Properties()
-					.stacksTo(1)
-					.component(DataComponents.EQUIPPABLE, Equippable.saddle()));
+			properties -> new UpgradedSaddleItem(properties),
+			new Item.Properties().stacksTo(1));
 
 	private static Item register(String name, Function<Item.Properties, Item> factory, Item.Properties settings) {
 		ResourceKey<Item> key = ResourceKey.create(Registries.ITEM, PigCompanionMod.id(name));
