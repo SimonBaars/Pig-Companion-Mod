@@ -2,21 +2,32 @@ package com.simonbaars.pigcompanion.client;
 
 import com.simonbaars.pigcompanion.entity.ModEntities;
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
-import net.minecraft.client.render.entity.PigEntityRenderer;
+import net.fabricmc.fabric.api.client.rendering.v1.ModelLayerRegistry;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 
+/**
+ * Client-side initialization for Pig Companion Mod.
+ * Registers custom entity renderers using MC 26.2 RenderState pattern.
+ */
 public class PigCompanionModClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
-		// Register entity renderers
-		EntityRendererRegistry.register(ModEntities.PIG_LEATHER, PigEntityRenderer::new);
-		EntityRendererRegistry.register(ModEntities.PIG_IRON, PigEntityRenderer::new);
-		EntityRendererRegistry.register(ModEntities.PIG_GOLD, PigEntityRenderer::new);
-		EntityRendererRegistry.register(ModEntities.PIG_DIAMOND, PigEntityRenderer::new);
+		// Register model layer (shared by all pig variants)
+		ModelLayerRegistry.registerModelLayer(ModModelLayers.PIG_COMPANION, PigCompanionModel::createBodyLayer);
 		
-		EntityRendererRegistry.register(ModEntities.PIG_COMPANION_LEATHER, PigEntityRenderer::new);
-		EntityRendererRegistry.register(ModEntities.PIG_COMPANION_IRON, PigEntityRenderer::new);
-		EntityRendererRegistry.register(ModEntities.PIG_COMPANION_GOLD, PigEntityRenderer::new);
-		EntityRendererRegistry.register(ModEntities.PIG_COMPANION_DIAMOND, PigEntityRenderer::new);
+		// Register ArmoredPig renderers (4 variants)
+		EntityRenderers.register(ModEntities.PIG_LEATHER, ArmoredPigRenderer.Leather::new);
+		EntityRenderers.register(ModEntities.PIG_IRON, ArmoredPigRenderer.Iron::new);
+		EntityRenderers.register(ModEntities.PIG_GOLD, ArmoredPigRenderer.Gold::new);
+		EntityRenderers.register(ModEntities.PIG_DIAMOND, ArmoredPigRenderer.Diamond::new);
+		
+		// Register CompanionPig renderers (4 variants)
+		EntityRenderers.register(ModEntities.PIG_COMPANION_LEATHER, CompanionPigRenderer.Leather::new);
+		EntityRenderers.register(ModEntities.PIG_COMPANION_IRON, CompanionPigRenderer.Iron::new);
+		EntityRenderers.register(ModEntities.PIG_COMPANION_GOLD, CompanionPigRenderer.Gold::new);
+		EntityRenderers.register(ModEntities.PIG_COMPANION_DIAMOND, CompanionPigRenderer.Diamond::new);
+		
+		// Register SuperPig renderer
+		EntityRenderers.register(ModEntities.SUPER_PIG, SuperPigRenderer::new);
 	}
 }
