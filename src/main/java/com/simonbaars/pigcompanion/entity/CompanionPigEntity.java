@@ -114,6 +114,103 @@ public class CompanionPigEntity extends Animal {
 
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        ItemStack stack = player.getItemInHand(hand);
+        
+        // Easter Egg 1: Gunpowder → TNT explosion ring
+        if (stack.is(Items.GUNPOWDER)) {
+            if (!this.level().isClientSide()) {
+                // Spawn 36 TNT entities in a circle around the pig
+                for (int i = 0; i < 36; i++) {
+                    double angle = i * Math.PI * 2.0 / 36.0;
+                    double offsetX = Math.cos(angle) * 2.0;
+                    double offsetZ = Math.sin(angle) * 2.0;
+                    
+                    net.minecraft.world.entity.item.PrimedTnt tnt = new net.minecraft.world.entity.item.PrimedTnt(
+                        this.level(), this.getX() + offsetX, this.getY(), this.getZ() + offsetZ, null);
+                    tnt.setFuse(40 + i);
+                    this.level().addFreshEntity(tnt);
+                }
+                
+                // Consume 9 gunpowder if not in creative
+                if (!player.hasInfiniteMaterials()) {
+                    stack.shrink(9);
+                }
+            }
+            return InteractionResult.SUCCESS;
+        }
+        
+        // Easter Egg 2: Feather → fling/launch pig
+        if (stack.is(Items.FEATHER)) {
+            if (!this.level().isClientSide()) {
+                // Launch pig upward and forward
+                double launchPower = 2.0;
+                this.setDeltaMovement(
+                    this.getDeltaMovement().x * 2.0,
+                    launchPower,
+                    this.getDeltaMovement().z * 2.0
+                );
+                this.hurtMarked = true;  // MC 26.2: hasImpulse → hurtMarked
+                
+                if (!player.hasInfiniteMaterials()) {
+                    stack.shrink(1);
+                }
+            }
+            return InteractionResult.SUCCESS;
+        }
+        
+        // Easter Egg 3: Experience Bottle → XP bottle spray
+        if (stack.is(Items.EXPERIENCE_BOTTLE)) {
+            if (!this.level().isClientSide()) {
+                // Spawn 36 experience bottles in all directions (simplified - spawn fewer)
+                for (int i = 0; i < 12; i++) {
+                    // Spawn XP orbs instead since ThrownPotion API simpler
+                    net.minecraft.world.entity.ExperienceOrb orb = 
+                        new net.minecraft.world.entity.ExperienceOrb(this.level(), 
+                            this.getX() + (random.nextDouble() - 0.5) * 3,
+                            this.getY() + 1,
+                            this.getZ() + (random.nextDouble() - 0.5) * 3,
+                            5);
+                    this.level().addFreshEntity(orb);
+                }
+                
+                // Consume 5 bottles if not in creative
+                if (!player.hasInfiniteMaterials()) {
+                    stack.shrink(5);
+                }
+            }
+            return InteractionResult.SUCCESS;
+        }
+        
+        // Easter Egg 4: Glowstone Dust → particle effects
+        if (stack.is(Items.GLOWSTONE_DUST)) {
+            if (!this.level().isClientSide()) {
+                // Spawn various particles around the pig
+                this.level().addParticle(net.minecraft.core.particles.ParticleTypes.SMOKE, 
+                    this.getX() + 1, this.getY() + 0.5, this.getZ(), 0, 0, 0);
+                this.level().addParticle(net.minecraft.core.particles.ParticleTypes.POOF, 
+                    this.getX(), this.getY() + 0.5, this.getZ() + 1, 0, 0, 0);
+                this.level().addParticle(net.minecraft.core.particles.ParticleTypes.SPLASH, 
+                    this.getX() + 1, this.getY() + 0.5, this.getZ() - 1, 0, 0, 0);
+                this.level().addParticle(net.minecraft.core.particles.ParticleTypes.BUBBLE, 
+                    this.getX(), this.getY() + 0.5, this.getZ(), 0, 0, 0);
+                this.level().addParticle(net.minecraft.core.particles.ParticleTypes.ENCHANTED_HIT, 
+                    this.getX() - 1, this.getY() + 0.5, this.getZ() + 1, 0, 0, 0);
+                this.level().addParticle(net.minecraft.core.particles.ParticleTypes.FLAME, 
+                    this.getX(), this.getY() + 0.5, this.getZ() - 1, 0, 0, 0);
+                this.level().addParticle(net.minecraft.core.particles.ParticleTypes.HAPPY_VILLAGER, 
+                    this.getX() - 1, this.getY() + 0.5, this.getZ(), 0, 0, 0);
+                this.level().addParticle(net.minecraft.core.particles.ParticleTypes.DUST_PLUME, 
+                    this.getX(), this.getY() + 0.5, this.getZ() + 1, 0, 0, 0);
+                this.level().addParticle(net.minecraft.core.particles.ParticleTypes.LAVA, 
+                    this.getX() + 1, this.getY() + 0.5, this.getZ() - 1, 0, 0, 0);
+                
+                if (!player.hasInfiniteMaterials()) {
+                    stack.shrink(1);
+                }
+            }
+            return InteractionResult.SUCCESS;
+        }
+        
         // Allow player to mount if saddled and not a baby
         if (this.isSaddled() && !this.isBaby() && !this.isVehicle() && !player.isSecondaryUseActive()) {
             if (!this.level().isClientSide()) {
