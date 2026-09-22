@@ -17,6 +17,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
@@ -108,5 +110,18 @@ public class CompanionPigEntity extends AnimalEntity {
             this.onAttacking(target);
         }
         return bl;
+    }
+
+    @Override
+    public ActionResult interactMob(PlayerEntity player, Hand hand) {
+        // Allow player to mount if saddled and not a baby
+        if (this.isSaddled() && !this.isBaby() && !this.hasPassengers() && !player.shouldCancelInteraction()) {
+            if (!this.getWorld().isClient) {
+                player.startRiding(this);
+            }
+            return ActionResult.success(this.getWorld().isClient);
+        }
+        
+        return super.interactMob(player, hand);
     }
 }
